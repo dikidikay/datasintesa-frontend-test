@@ -1,0 +1,10 @@
+.usersFilterControl {
+  display: flex;
+  flex-direction: column;
+}
+
+.usersFilterControl select {
+  text-align: center;
+  width: 100%;
+  font-family: inherit;
+}

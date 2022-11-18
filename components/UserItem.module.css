@@ -1,0 +1,27 @@
+.card {
+  border: none;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+}
+
+.cardContent {
+  margin-top: 2rem;
+}
+
+.cardContent p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+
+.cardContent .title {
+  font-weight: 700;
+}
+
+.avatarDetail {
+  display: block;
+  width: 13rem;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 2.4rem;
+}
