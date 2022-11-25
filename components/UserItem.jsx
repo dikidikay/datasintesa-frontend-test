@@ -3,7 +3,6 @@ import styles from "./UserItem.module.css";
 import moment from "moment";
 
 const UserItem = ({ item }) => {
-  console.log(item);
   // Membuat moment object dari tanggal lahir
   const date = moment(item.dob.date);
 

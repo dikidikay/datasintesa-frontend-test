@@ -1,26 +1,9 @@
-import { useContext } from "react";
 import styles from "./UsersFilter.module.css";
-import { getUsersFiltered } from "context/UsersActions";
-import UsersContext from "context/UsersContext";
 
-const UsersFilter = () => {
-  const { dispatch } = useContext(UsersContext);
-
+const UsersFilter = ({ setNat, setPage }) => {
   const filterHandler = (e) => {
-    dispatch({
-      type: "SET_LOADING",
-    });
-
-    const getUsersDataFiltered = async () => {
-      const userData = await getUsersFiltered(e.target.value);
-
-      dispatch({
-        type: "GET_USERS",
-        payload: userData,
-      });
-    };
-
-    getUsersDataFiltered();
+    setNat(e.target.value);
+    setPage(1);
   };
 
   return (

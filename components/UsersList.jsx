@@ -2,37 +2,34 @@ import { List } from "antd";
 import UserItem from "./UserItem";
 import styles from "./UsersList.module.css";
 
-import { useEffect, useContext } from "react";
-import UsersContext from "context/UsersContext";
-import { getUsers } from "context/UsersActions";
+import { useEffect, useState } from "react";
+import { getUsers } from "lib/axios";
 import UsersFilter from "./UsersFilter";
 
 const UsersList = () => {
-  const { users, dispatch, loading } = useContext(UsersContext);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [nat, setNat] = useState(undefined);
+  const [page, setPage] = useState(1);
 
-  // Fetch data user, lalu simpan di context
   useEffect(() => {
-    dispatch({
-      type: "SET_LOADING",
-    });
+    setLoading(true);
 
     const getUsersData = async () => {
-      const userData = await getUsers();
+      const userData = await getUsers(nat, page);
 
-      dispatch({
-        type: "GET_USERS",
-        payload: userData,
-      });
+      setUsers(userData);
+      setLoading(false);
     };
 
     getUsersData();
-  }, [dispatch]);
+  }, [page, nat]);
 
   return (
     <>
       <div className={styles.listHeader}>
         <h2 className="headingSecondary">List Users</h2>
-        <UsersFilter />
+        <UsersFilter setNat={setNat} setPage={setPage} />
       </div>
       <List
         loading={loading}
@@ -53,6 +50,12 @@ const UsersList = () => {
           users.length > 0 && {
             simple: true,
             style: { textAlign: "center" },
+            pageSize: 10,
+            total: 100,
+            onChange: (page) => {
+              setPage(page);
+            },
+            current: page,
           }
         }
       />
